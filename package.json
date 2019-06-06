@@ -1,7 +1,7 @@
 {
-  "name": "challenge",
-  "version": "0.1.0",
-  "private": true,
+  "name": "rescale-fe",
+  "version": "1.0.0",
+  "description": "The Frontend take home project for Rescale",
   "dependencies": {
     "express": "^4.17.1",
     "react": "^16.8.6",
