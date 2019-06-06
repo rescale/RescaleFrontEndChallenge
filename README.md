@@ -1,68 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Rescale Front End Technical Challenge
 
-## Available Scripts
+This is the take home front end challenge for Rescale. This project should take around 3 hours to complete.
 
-In the project directory, you can run:
+The intention of this project is to get a better understanding of your coding ability, your design sense, ux chops & your creativity. It's also intended to give you a better understanding of what we do at Rescale. The application that you will build is a simple version of Rescale's platform. Users should be able to select software simulations & hardware, to run jobs and get back results. 
 
-### `npm start`
+Maybe an easier way to understand the application is to break it into two parts 1. displaying existing jobs/simulations and 2. creating a new job/simulation. 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To display existing jobs/simulations you will want to use the jobs endpoint & the individual jobs endpoint. These endpoints will allow you to get existing jobs/simulations, their names, ids, and results (for this exercise all results will be images). So for example if there was a Structural Analysis (the software) job dealing with strength analysis (the application) the results might be an image of the engineered item and additional images of graphs of data from the simulation.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+To create a new job/simulation you will want to use the software and hardware endpoints to retrieve the possible selections so that your end user can name their new job, select the software & application of the job/simulations they would like to run and then choose hardware and the amount of cores they would like to use. This information can then be passed back to the server to create a new job/simulation.
 
-### `npm test`
+If you are invited for an in person interview we will use your project as a starting point for further discussion & we might ask you to add more functionality to what you have already built. Due to time constraints, no testing is required at this stage. At this point there is no endpoint for deleting jobs, the database is in memory so if you'd like to delete jobs you can just stop and restart the server.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+tldr:
 
-### `npm run build`
+Please create an application that uses the endpoints provided. Your application should be able to show the current jobs and their results and should be able to create a new job and show its results.  Please email any questions you may have to davidl at rescale.com.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Jobs Endpoint:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+http://localhost:4000/api/jobs
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This endpoint (GET) returns a JSON object with all of the current jobs in the application, there are 3 jobs each has a name an id, their software and hardware selections and their results
 
-### `npm run eject`
+Individual Job Endpoint:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+http://localhost:4000/api/jobs/:jobId
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This endpoint (GET) returns a JSON object with the information for a particular job.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Software Endpoint:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+http://localhost:4000/api/software
 
-## Learn More
+This endpoint (GET) returns a JSON object with options for software/simulation. There are three top level choices of Computational Fluid Dynamics, Structural Analysis & Electromagnetics. Each selection includes several applications such as Aircraft Icing, Turbulence Modeling or Thermal Analysis.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Hardware Endpoint:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+http://localhost:4000/api/hardware
 
-### Code Splitting
+This endpoint (GET) returns a JSON object with options for hardware. There are three hardware selections and each shows the options of how many cores are available.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Create New Job Endpoint:
 
-### Analyzing the Bundle Size
+http://localhost:4000/api/create
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+This endpoint (POST) allows you to create a new job. To create a new job you should post with data in the following format:
 
-### Making a Progressive Web App
+{
+  'name': 'New Job Name',
+  'softwareId': 'cfd',
+  'applicationId': 'icing',
+  'hardwareId': 'e4',
+  'cores': 32,
+}
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+After cloning the repository on your local machine run: 'npm install'
 
-### Advanced Configuration
+To get the api server and the dev server running at the same time please run:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+'npm run api-server'
 
-### Deployment
+&
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+'npm run dev-server'
 
-### `npm run build` fails to minify
+The api server runs on http://localhost:4000/api/
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+& the dev server runs on http://localhost:3000/
+
+I've provided a basic boilerplate for React, but feel free to use whatever framework you feel comfortable with--just use server.js that can be found in the src folder.
+
+When you are finished, please compress your project and send it to me at davidl at rescale.com. Please do not share your code for this exercise publicly on github or other sites.
+
+Good Luck!
+
+-David
+
